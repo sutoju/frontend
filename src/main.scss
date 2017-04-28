@@ -1,0 +1,79 @@
+@import './mixins.scss';
+
+// colors
+$accent: #50cb82;
+$accent_dark: darken($accent, 20);
+$black: #213529;
+$grey: #e6e6e6;
+$light_grey: #f5f5f5;
+$dark_grey: #b3b3b3;
+$text: #000;
+
+// dimens
+$small: 4px;
+$medium: $small * 2;
+$large: $small * 4;
+$radius_small: .2em;
+
+* {
+    outline: none;
+}
+
+.container {
+    padding: $medium;
+    margin: $medium;
+}
+
+.fluid {
+    margin: 0;
+}
+
+.container-small {
+    padding: $small;
+    margin: $small;
+}
+
+.box {
+    border: 1px solid $dark_grey;
+}
+
+.well {
+    background: $grey;
+}
+
+.input-element {
+    margin: $small;
+    padding: $medium;
+}
+
+.sans-serif {
+  font-family: sans-serif;
+}
+
+.button {
+    @extend .input-element;
+    @extend .sans-serif;
+
+    $color: black;
+    @include colorButton($color, $light_grey);
+    display: inline-block;
+    border-radius: $radius_small;
+    text-decoration: none;
+
+    &:visited {
+        text-decoration: none;
+        color: $color;
+    }
+}
+
+.title-first {
+  display: inline-block;
+  margin: 0;
+  padding: $medium;
+  font-size: 22pt;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

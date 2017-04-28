@@ -1,0 +1,12 @@
+@mixin hoverHighlight($backgroundColor) {
+  &:hover {
+    background-color: darken($backgroundColor, 80);
+  }
+}
+
+@mixin colorButton($textColor, $backgroundColor) {
+  @include hoverHighlight($backgroundColor);
+
+  color: $textColor;
+  background-color: $backgroundColor;
+}
