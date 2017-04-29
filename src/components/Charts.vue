@@ -90,6 +90,7 @@ const parseDifference = (values) => {
     })
     return values
   }
+  return []
 }
 
 const formattedDataset = (name, key, rawData) => {
