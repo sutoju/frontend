@@ -1,9 +1,9 @@
 <template>
   <div class="item">
-    <div class="image" :style="{ 'background-image': 'url('+imagesrc+')' }">
-      <div class="title">
-        <div class="word" v-for="word in words">{{ word }}</div>
-      </div>
+    <img class="image" :src="imagesrc"/>
+    <div class="title">
+      <!--<div class="word" v-for="word in words">{{ word }}</div>-->
+      {{ title }}
     </div>
   </div>
 </template>
@@ -30,22 +30,27 @@ export default {
 .item {
   @extend .source-sans;
   position: relative;
-  border-radius: 10px;
-  border: 1px solid #dedede;
-  margin: $small 0;
+  border-bottom: 1px solid #dedede;
+  
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100px;
+  justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
 
+  &:first-child {
+    border-top: 1px solid #dedede;
+  }
+
   @media (max-width: 767px) {
-    height: 160px;
+    height: 80px;
 
     .title {
+      flex: 1;
       line-height: 0.9;
-      font-size: 40pt;
+      font-size: 18pt;
       color: transparentize(#333, 0.1);
+      background: white;
+      padding: $small;
 
       .word {
         display: inline-block;
@@ -56,10 +61,10 @@ export default {
 }
 
 .image {
-  flex: 1;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
+  width: 120px;
+  // background-position: left;
+  // background-repeat: no-repeat;
+  // background-size: 30%;
 }
 
 .title {

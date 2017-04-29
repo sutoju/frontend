@@ -17,13 +17,13 @@
       </list-item>
     </div>
 
-    <pre class="container fluid well box">
+    <!--<pre class="container fluid well box">
       {{ recipies }}
     </pre>
   
     <pre class="container fluid well box">
       {{ recipeList }}
-    </pre>
+    </pre>-->
 
   </div>
 </template>

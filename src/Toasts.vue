@@ -23,14 +23,19 @@ export default {
   position: absolute;
   bottom: 2 * $large;
   left: 2 * $large;
+
+  @media (max-width: 767px) {
+    top: $large * 4;
+    left: $medium;
+    right: $medium;
+  }
 }
 
 .toast {
   @extend .source-sans;
-  border: 1px solid #dedede;
   border-radius: $radius_small;
-  box-shadow: 0px 1px 1px 0px rgba(132, 132, 132, 0.2);
   color: #cacaca;
+  padding: $medium;
   background-color: #474747;
 }
 

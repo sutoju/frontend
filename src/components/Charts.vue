@@ -8,12 +8,12 @@
 
         <div>
           <div class="input-inline">
-            <span class="input-label">start</span>
+            <span class="input-label">from</span>
             <datepicker v-on:selected="setStartTime" :value="startTime"></datepicker>
           </div>
     
           <div class="input-inline">
-            <span class="input-label">end</span>
+            <span class="input-label">to</span>
             <datepicker v-on:selected="setEndTime" :value="endTime"></datepicker>
           </div>
         </div>

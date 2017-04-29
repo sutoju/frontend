@@ -94,6 +94,8 @@ export default {
           return '🍎'
         case 'orange':
           return '🍊'
+        case 'ananas':
+          return '🍍'
         default:
           return '🍽️'
       }
