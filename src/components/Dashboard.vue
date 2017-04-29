@@ -195,7 +195,8 @@ export default {
     }
 
     .fruit-info {
-      font-size: 10pt;
+      white-space: nowrap;
+      font-size: 9.5pt;
     }
   }
 
