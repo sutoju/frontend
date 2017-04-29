@@ -13,13 +13,11 @@
   "dependencies": {
     "chart.js": "^2.5.0",
     "chartjs": "^0.3.24",
-    "emojione": "^3.0.1",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3",
     "vue": "^2.2.6",
     "vue-awesome": "^2.2.8",
     "vue-chartjs": "^2.6.1",
-    "vue-emojione": "^1.0.3",
     "vue-router": "^2.3.1",
     "vuejs-datepicker": "^0.7.10",
     "vuex": "^2.3.1",

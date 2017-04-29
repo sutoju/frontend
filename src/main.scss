@@ -31,6 +31,13 @@ $radius_small: .2em;
   padding: $medium 0;
 }
 
+.filter-header {
+  display: flex;
+  align-items: center;
+  font-weight: lighter;
+  justify-content: flex-end;
+}
+
 .container-title {
   font-size: 16pt;
   font-weight: lighter;
@@ -96,7 +103,28 @@ $radius_small: .2em;
 }
 
 .input-inline {
-  // display: inline;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: $medium;
+  border: 1px solid $dark_grey;
+  border-radius: $radius_small;
+  overflow: hidden;
+
+  .input-label {
+    padding: 0 $medium;
+  }
+
+  input {
+    border: none;
+    border-left: 1px solid $dark_grey;
+    padding: $medium;
+  }
+  
+}
+
+.borderless {
+  border: none; 
 }
 
 .text-button {

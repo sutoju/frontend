@@ -1,8 +1,6 @@
 <template>
   <div class="container fluid">
-    <div class="title-first">
-      Dashboard
-    </div>
+    <div class="title-first">Dashboard</div>
   
     <div class="container fluid">
       <div class="container-header">
@@ -18,7 +16,14 @@
         </button>
       </div>
 
-      <div class="food-list">
+      <div class="filter-header">
+        <div class="input-inline">
+          <span class="input-label">input</span>
+          <input />
+        </div>
+      </div>
+
+      <div class="food-list container fluid">
         <card class="fruit"
           v-for="food in foodData"
           :title="food.type"
@@ -54,8 +59,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueEmoji from 'vue-emojione'
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 import 'vue-awesome/icons/plus'
@@ -64,11 +67,6 @@ import 'vue-awesome/icons/calendar'
 import 'vue-awesome/icons/circle-o-notch'
 
 import Card from './Card'
-
-Vue.use(VueEmoji, {
-  imageType: 'svg',
-  sprites: true
-})
 
 export default {
   name: 'dashboard',
@@ -137,6 +135,7 @@ export default {
   min-height: 200px;
   text-align: center;
   overflow: hidden;
+  background-color: white;
 
   &.editing {
     filter: blur(2px);

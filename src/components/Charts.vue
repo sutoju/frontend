@@ -3,20 +3,24 @@
     <div class="title-first">Charts</div>
   
     <div class="container fluid">
-      <div class="container-header">
-        <div class="container-title">Time</div>
+
+      <div class="filter-header">
+        <span class="container-title">Time</span>
+
+        <div>
+          <div class="input-inline">
+            <span class="input-label">start</span>
+            <datepicker :value="startTime"></datepicker>
+          </div>
+    
+          <div class="input-inline">
+            <span class="input-label">end</span>
+            <datepicker :value="endTime"></datepicker>
+          </div>
+        </div>
+
       </div>
 
-      <div class="input-group input-inline">
-        <div class="input-label">start</div>
-        <datepicker :value="startTime"></datepicker>
-      </div>
-  
-      <div class="input-group input-inline">
-        <div class="input-label">end</div>
-        <datepicker :value="endTime"></datepicker>
-      </div>
-      
     </div>
   
     <div class="container rounded well box">

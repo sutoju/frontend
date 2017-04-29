@@ -1624,14 +1624,6 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-emojione:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/emojione/-/emojione-3.0.1.tgz#4106306d842deee9de170f45c372988afea1262c"
-
-emojione@^2.2.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/emojione/-/emojione-2.2.7.tgz#46457cf6b9b2f8da13ae8a2e4e547de06ee15e96"
-
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -4631,12 +4623,6 @@ vue-chartjs:
   resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-2.6.1.tgz#7cf834dd805300ee5b5c68c97cd353c87d23b212"
   dependencies:
     lodash "^4.17.4"
-
-vue-emojione:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/vue-emojione/-/vue-emojione-1.0.3.tgz#f362347847df82c0718ac6e9ba75a24e475b35e5"
-  dependencies:
-    emojione "^2.2.7"
 
 vue-hot-reload-api@^2.0.11:
   version "2.1.0"
