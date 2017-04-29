@@ -29,7 +29,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
       BANANA_COUNT_LIMIT: JSON.stringify(process.env.SUTOJUPASSWORD),
-      BANANA_TOGGLE: JSON.stringify(process.env.USE_EMOJIS)
+      BANANA_TOGGLE: process.env.USE_EMOJIS
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

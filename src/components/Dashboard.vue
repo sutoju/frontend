@@ -80,11 +80,12 @@ export default {
     this.loadFoodData()
   },
   data() {
+    /*eslint-disable */
+    console.log(BANANA_TOGGLE)
     return {
       toastInput: 'qweqw',
       editMode: false,
-      /*eslint-disable */
-      useEmojis: BANANA_TOGGLE || false
+      useEmojis: !!BANANA_TOGGLE || false
       /*eslint-enable */
     }
   },
