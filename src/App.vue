@@ -5,7 +5,7 @@
       <router-link class="nav-link" :to="'/recipies'">recipes</router-link>
       <router-link class="nav-link" :to="'/chart'">statistics</router-link>
     </nav>
-  
+
     <div class="child">
       <transition name="fade" mode="out-in">
         <router-view></router-view>
@@ -34,7 +34,7 @@ export default {
     console.log('banana', BANANA_COUNT_LIMIT)
     /*eslint-enable */
     if (socket === undefined) {
-      socket = api.getSocket('ws://sutoju-logic.eu-gb.mybluemix.net/ws/feed')
+      socket = api.getSocket('wss://sutoju-logic.eu-gb.mybluemix.net/ws/feed')
 
       socket.onopen = msg => {
         console.log(msg)
