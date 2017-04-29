@@ -1,32 +1,39 @@
 <template>
-  <div class="rounded card">
+  <div class="item">
     <div class="title">{{ title }}</div>
-    <div class="content">
-      <slot>
-        <p>Empty card content</p>
-        <button class="button fluid">button</button>
-      </slot>
+    <div class="image" :style="{ 'background-image': 'url('+imagesrc+')' }">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['title'],
-  name: 'card'
+  props: ['title', 'imagesrc'],
+  name: 'list-item'
 }
 
 </script>
 
 <style scoped lang="scss">
 @import '../main.scss';
-.card {
-  // max-width: 400px;
+.item {
+  position: relative;
   border-radius: 10px;
+  border: 1px solid #dedede;
+  margin: $small 0;
   padding: $medium;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100px;
+
+}
+
+.image {
+  flex: 1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .title {

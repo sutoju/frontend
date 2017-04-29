@@ -18,13 +18,17 @@ const store = new Vuex.Store({
     endTime: WEEK,
     data: [],
     foodData: [],
-    toasts: []
+    toasts: [],
+    recipies: {},
+    recipeList: []
   },
   getters: {
     getVisibleToasts: state => state.toasts,
     startTime: state => new Date(state.startTime),
     endTime: state => new Date(state.endTime),
-    foodData: state => state.foodData
+    foodData: state => state.foodData,
+    recipies: state => state.recipies,
+    recipeList: state => state.recipeList
   },
   mutations: {
     setData: (state, data) => { state.data = data },
@@ -58,7 +62,9 @@ const store = new Vuex.Store({
       }
     },
     setStartTime: (state, timestamp) => { state.startTime = timestamp },
-    setEndTime: (state, timestamp) => { state.endTime = timestamp }
+    setEndTime: (state, timestamp) => { state.endTime = timestamp },
+    saveRecipe: (state, { id, recipe }) => { state.recipies[id] = recipe },
+    saveRecipeList: (state, list) => { state.recipeList = list }
   },
   actions: {
     saveData (context, data) {
@@ -117,15 +123,23 @@ const store = new Vuex.Store({
           })
       }
     },
-    setStartTime(context, date) {
+    setStartTime (context, date) {
       const timestamp = date.getTime()
       context.commit('setStartTime', timestamp)
       context.dispatch('loadDataBetweenPoints')
     },
-    setEndTime(context, date) {
+    setEndTime (context, date) {
       const timestamp = date.getTime()
       context.commit('setEndTime', timestamp)
       context.dispatch('loadDataBetweenPoints')
+    },
+    loadRecipe (context, id) {
+      api.getJSON('recipes/' + id)
+        .then(json => context.commit('saveRecipe', { id, json }))
+    },
+    loadRecipeList (context, id) {
+      api.getJSON('recipes')
+        .then(json => context.commit('saveRecipeList', json.recipes))
     }
   }
 })

@@ -3,6 +3,7 @@
     <nav>
       <router-link class="nav-link" :to="'/'">dashboard</router-link>
       <router-link class="nav-link" :to="'/chart'">charts</router-link>
+      <router-link class="nav-link" :to="'/recipies'">recipies</router-link>
     </nav>
   
     <div class="child container fluid">
