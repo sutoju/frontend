@@ -16,6 +16,7 @@ $large: $small * 4;
 $radius_small: .2em;
 
 * {
+  user-select: none;
   outline: none;
 }
 

@@ -19,12 +19,12 @@
       <div class="food-list">
         <card class="fruit"
           v-for="food in foodData"
-          :title="food.type"
         >
           <div v-bind:class="{
           '': !editMode,
           'blurred': editMode
           }">
+            <div class="fruit-title">{{ food.type }}</div>
             <div class="emoji fruit-picture">
             {{ formatEmoji(food.type) }}
             </div>
@@ -133,7 +133,8 @@ export default {
 
 .fruit {
   position: relative;
-  min-width: 220px;
+  width: 220px;
+  height: 220px;
   text-align: center;
   overflow: hidden;
   background-color: white;
@@ -145,12 +146,20 @@ export default {
   color: #404040;
 
   @media (max-width: 767px) {
-    font-size: 0.8rem;
-    flex: 1 1 auto;
-    min-width: 30%;
+    height: 100px;
+    width: 100px;
+
+    .fruit-title {
+      margin-top: 10px;
+      font-size: 12pt;
+    }
 
     .emoji {
-      font-size: 30pt;
+      font-size: 20pt;
+    }
+
+    .fruit-info {
+      font-size: 10pt;
     }
   }
 
@@ -173,9 +182,10 @@ export default {
   font-size: 13pt;
 }
 
-.fruit-name {
+.fruit-title {
   color: $black;
   font-size: 18pt;
+  text-transform: capitalize;
 }
 
 .fruit-edit {
@@ -202,7 +212,8 @@ export default {
     align-items: center;
 
     .actions-type {
-      font-size: 16pt;
+      margin-top: 5px;
+      font-size: 18pt;
       text-transform: capitalize;
 
       @media (max-width: 767px) {

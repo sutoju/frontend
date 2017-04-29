@@ -36,13 +36,13 @@
              :height="400"></chart>
     </div>
 
-    <pre class="container well rounded source-code">
+    <!--<pre class="container well rounded source-code">
       {{ formattedWeightData }}
     </pre>
 
     <pre class="container well rounded source-code">
       {{ weightData }}
-    </pre>
+    </pre>-->
 
   </div>
 </template>

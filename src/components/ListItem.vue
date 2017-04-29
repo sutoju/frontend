@@ -54,32 +54,35 @@ export default {
   overflow: hidden;
   background-color: white;
 
-  // @media (min-width: 768px) {
-    height: 220px;
-    width: 220px;
-    margin: 0 $medium $medium 0;
-    padding: $medium;
-    border: 1px solid $light_grey;
-    border-radius: 10px;
-    overflow: hidden;
+  height: 220px;
+  width: 220px;
+  margin: 0 $medium $medium 0;
+  padding: $medium;
+  border: 1px solid $light_grey;
+  border-radius: 10px;
+  overflow: hidden;
 
-    .title {
-      position: absolute;
-      top: 0;
-      left: 0;
-      color: white;
-      padding: $medium;
-      font-size: 26pt;
-    }
-
+  &:active {
     .image {
-      filter: brightness(0.8) blur(4px);
-      position: absolute;
-      left: -25%;
-      width: 200%;
+      filter: brightness(0.6) blur(4px);
     }
+  }
 
-  // }
+  .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    padding: $medium;
+    font-size: 26pt;
+  }
+
+  .image {
+    filter: brightness(0.8) blur(4px);
+    position: absolute;
+    left: -25%;
+    width: 200%;
+  }
 
   @media (max-width: 767px) {
     height: 100px;
@@ -89,37 +92,10 @@ export default {
       font-size: 16pt;
     }
   }
-  //   height: 80px;
-  //   border-bottom: 1px solid #dedede;
-
-  //   &:first-child {
-  //     border-top: 1px solid #dedede;
-  //   }
-
-  //   .title {
-  //     flex: 1;
-  //     line-height: 0.9;
-  //     font-size: 18pt;
-  //     color: transparentize(#333, 0.1);
-  //     background: white;
-  //     padding: $small;
-
-  //     .word {
-  //       display: inline-block;
-  //       background: white;
-  //     }
-  //   }
-
-  //   .image {
-  //     width: 120px;
-  //   }
-  // }
 }
 
 .title {
   text-transform: capitalize;
 }
 
-.content {
-}
 </style>
