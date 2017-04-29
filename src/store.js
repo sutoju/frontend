@@ -14,6 +14,7 @@ const WEEK = moment().add(7, 'days').valueOf()
 
 const store = new Vuex.Store({
   state: {
+    loadingSomething: false,
     startTime: NOW,
     endTime: WEEK,
     data: [],
@@ -30,9 +31,11 @@ const store = new Vuex.Store({
     foodData: state => state.foodData,
     recipies: state => state.recipies,
     getRecipe: (state, id) => state.recipies[id],
-    recipeList: state => state.recipeList
+    recipeList: state => state.recipeList,
+    loadingSomething: state => state.loadingSomething
   },
   mutations: {
+    setLoadingSomething: (state, bool) => { state.loadingSomething = bool },
     setData: (state, data) => { state.data = data },
     addDataPoint: (state, data) => { state.data.push(data) },
     createToast: (state, { id, text }) => { state.toasts.push({ id, text, firedAt: moment().valueOf() }) },
@@ -71,6 +74,9 @@ const store = new Vuex.Store({
     saveRecipeList: (state, list) => { state.recipeList = list }
   },
   actions: {
+    setLoadingSomething (context, bool) {
+      context.commit('setLoadingSomething', bool)
+    },
     saveData (context, data) {
       context.commit('saveData', data)
     },
@@ -83,21 +89,33 @@ const store = new Vuex.Store({
       setTimeout(() => { context.commit('hideToast', id) }, TOAST_LIFETIME)
     },
     loadAllData (context) {
+      context.commit('setLoadingSomething', true)
       api.getJSON('weightData')
-        .then(json => context.commit('setData', json))
+        .then(json => {
+          context.commit('setLoadingSomething', false)
+          context.commit('setData', json)
+        })
     },
     loadDataBetweenPoints (context) {
       // take points from store or use default ones
       // default start = now, default end = now + 7 days
+      context.commit('setLoadingSomething', true)
       const start = context.state.startTime / 1000
       const end = context.state.endTime / 1000
       console.log(start, end)
       api.getJSON(`weightDataBetween?start=${start}&end=${end}`)
-        .then(json => context.commit('setData', json))
+        .then(json => {
+          context.commit('setLoadingSomething', false)
+          context.commit('setData', json)
+        })
     },
     loadFoodData (context) {
+      context.commit('setLoadingSomething', true)
       api.getJSON('sortedFood')
-        .then(json => context.commit('setFoodData', json))
+        .then(json => {
+          context.commit('setFoodData', json)
+          context.commit('setLoadingSomething', false)
+        })
     },
     editFood (context, command) {
       const { action, type, expires } = command
@@ -138,21 +156,22 @@ const store = new Vuex.Store({
       context.dispatch('loadDataBetweenPoints')
     },
     loadRecipe (context, id) {
+      context.commit('setLoadingSomething', true)
       api.getJSON('recipes/' + id)
-        .then(json => context.commit('saveRecipe', { id, recipe: json.ingredients }))
+        .then(json => {
+          context.commit('setLoadingSomething', false)
+          context.commit('saveRecipe', { id, recipe: json.ingredients })
+        })
     },
     loadRecipeList (context, id) {
+      context.commit('setLoadingSomething', true)
       api.getJSON('recipes')
-        .then(json => context.commit('saveRecipeList', json.recipes))
+        .then(json => {
+          context.commit('saveRecipeList', json.recipes)
+          context.commit('setLoadingSomething', false)
+        })
     }
   }
 })
 
 export default store
-
-/*
-const start = 0
-    const end = 600
-    api.getJSON(`weightDataBetween?start=${start}&end=${end}`)
-      .then(json => console.log(json))
- */

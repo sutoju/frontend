@@ -6,31 +6,10 @@
 </template>
 
 <script>
-// import Vibrant from 'node-vibrant'
-
-// const getSwatch = (img) => {
-//   const vibrant = new Vibrant(img)
-//   const swatches = vibrant.swatches()
-//   console.log(swatches)
-// }
-
-/*
-* Results into:
-* Vibrant #7a4426
-* Muted #7b9eae
-* DarkVibrant #348945
-* DarkMuted #141414
-* LightVibrant #f3ccb4
-*/
 
 export default {
   props: ['title', 'link', 'imagesrc'],
   name: 'list-item',
-  mounted () {
-    console.log(this.title, this.link)
-    // const el = this.$refs.recipeImage
-    // getSwatch(el)
-  },
   methods: {
     pushRoute() {
       this.$router.push(this.link)
@@ -59,7 +38,7 @@ export default {
   align-items: center;
   overflow: hidden;
   background-color: white;
-
+  cursor: pointer;
   height: 220px;
   width: 220px;
   margin: 0 $medium $medium 0;
@@ -88,6 +67,7 @@ export default {
     filter: brightness(0.8) blur(4px);
     position: absolute;
     left: -25%;
+    top: -10%;
     width: 200%;
   }
 

@@ -3,7 +3,7 @@
     <nav>
       <router-link class="nav-link" :to="'/'">dashboard</router-link>
       <router-link class="nav-link" :to="'/recipies'">recipes</router-link>
-      <router-link class="nav-link" :to="'/chart'">waste history</router-link>
+      <router-link class="nav-link" :to="'/chart'">statistics</router-link>
     </nav>
   
     <div class="child">
@@ -13,13 +13,15 @@
     </div>
 
     <toasts></toasts>
+    <spinner :animating="loadingSomething"></spinner>
   
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Toasts from './Toasts'
+import Spinner from './components/Spinner'
 import * as api from './api.js'
 import './main.scss'
 
@@ -47,7 +49,7 @@ export default {
           console.log('handle message: ', data)
           if (data.messageType) {
             if (data.messageType === 'food' && data.action) {
-              this.createToast(data.action + 'ed one ' + data.type)
+              this.createToast(data.action + ' ' + data.type)
               this.editFood({ action: data.action, type: data.type, expires: data.expires })
             } else if (data.messageType === 'weight' && data.weight) {
               const { messageType, ...dataPoint } = data
@@ -62,7 +64,11 @@ export default {
     }
   },
   components: {
-    Toasts
+    Toasts,
+    Spinner
+  },
+  computed: {
+    ...mapGetters(['loadingSomething'])
   },
   methods: {
     ...mapActions(['addDataPoint', 'createToast', 'editFood'])

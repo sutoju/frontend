@@ -7,4 +7,3 @@ export default Line.extend({
     this.renderChart(this.chartData, this.options)
   }
 })
-

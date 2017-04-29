@@ -46,16 +46,34 @@ import { mapGetters, mapActions } from 'vuex'
 import Chart from './Chart'
 import Card from './Card'
 
-const chartOptions = {
+const defaultChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   line: {
     capBezierPoints: false
   },
+  title: {
+    display: false,
+    fontFamily: 'Source Code Pro',
+    fontSize: '20pt'
+  },
   scales: {
+    yAxes: [{
+      type: 'linear',
+      scaleLabel: {
+        display: true
+      },
+      position: 'left',
+      gridLines: {
+        display: true
+      }
+    }],
     xAxes: [{
       type: 'time',
       position: 'bottom',
+      gridLines: {
+        display: true
+      },
       time: {
         displayFormats: {
           'millisecond': 'hh:mm:ss'
@@ -85,7 +103,7 @@ const formattedDataset = (name, key, rawData) => {
       datasets: [
         {
           label: name,
-          borderColor: key === 'difference' ? '#50cb82' : '#cb5065',
+          borderColor: key === 'difference' ? '#50cb82' : '#4da4dd',
           fill: false,
           lineTension: 0,
           pointRadius: 0,
@@ -114,17 +132,15 @@ export default {
     console.log('mounted')
     this.$store.dispatch('loadDataBetweenPoints')
   },
-  data () {
-    return {
-      chartOptions
-    }
-  },
   computed: {
+    chartOptions () {
+      return defaultChartOptions
+    },
     formattedWeightData () {
-      return formattedDataset('Weight', 'weight', this.weightData)
+      return formattedDataset('Total food waste', 'weight', this.weightData)
     },
     formattedDifferenceData () {
-      return parseDifference(formattedDataset('Difference', 'difference', this.weightData))
+      return parseDifference(formattedDataset('Waste generated', 'difference', this.weightData))
     },
     ...mapGetters(['startTime', 'endTime', 'weightData'])
   },

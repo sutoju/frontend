@@ -33,13 +33,15 @@ export default {
   },
   mounted () {
     console.log('mounted')
+    this.$store.commit('setLoadingSomething', true)
     this.loadRecipeList()
+      .then(() => this.$store.commit('setLoadingSomething', false))
   },
   computed: {
     ...mapGetters(['recipies', 'recipeList'])
   },
   methods: {
-    ...mapActions(['loadRecipeList', 'loadRecipe'])
+    ...mapActions(['loadRecipeList', 'loadRecipe', 'setLoadingSomething'])
   }
 }
 
