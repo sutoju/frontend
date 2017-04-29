@@ -9,8 +9,8 @@ Vue.use(Vuex)
 const TOAST_LIFETIME = 5000
 let nextToastId = 0
 
-const NOW = moment().hours(0).valueOf()
-const WEEK = moment().add(7, 'days').valueOf()
+const NOW = moment().hours(0).minutes(0).seconds(0).valueOf()
+const WEEK = moment().hours(23).minutes(59).seconds(59).valueOf()
 
 const store = new Vuex.Store({
   state: {
