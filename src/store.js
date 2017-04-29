@@ -163,7 +163,7 @@ const store = new Vuex.Store({
           context.commit('saveRecipe', { id, recipe: json.ingredients })
         })
     },
-    loadRecipeList (context, id) {
+    loadRecipeList (context) {
       context.commit('setLoadingSomething', true)
       api.getJSON('recipes')
         .then(json => {
