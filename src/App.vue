@@ -40,15 +40,22 @@ export default {
 }
 
 .nav-link {
-  @extend .sans-serif;
+  @extend .source-sans;
   color: $accent;
   padding: $medium;
   margin: $small;
   text-decoration: none;
   text-transform: uppercase;
+  border-radius: $radius_small;
+
+  @media (max-width: 767px) {
+
+  }
 
   &.router-link-exact-active {
-    border-bottom: 1px solid $accent;
+    // border-bottom: 1px solid $accent;
+    color: white !important;
+    background: $accent;
   }
 
   &:visited {
@@ -61,6 +68,12 @@ nav {
   padding: $medium;
   border-bottom: 1px solid #dedede;
   box-shadow: 0px 1px 1px 0px rgba(132, 132, 132, 0.2);
+  display: flex;
+  justify-content: flex-start;
+
+  @media (max-width: 767px) {
+    justify-content: space-around;
+  }
 }
 
 </style>

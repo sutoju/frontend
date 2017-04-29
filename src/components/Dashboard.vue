@@ -16,7 +16,7 @@
         </button>
       </div>
 
-      <div class="food-list container fluid">
+      <div class="food-list">
         <card class="fruit"
           v-for="food in foodData"
           :title="food.type"
@@ -120,15 +120,34 @@ export default {
 .food-list {
   display: flex;
   flex-wrap: wrap;
+  margin-top: $medium;
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+  }
 }
 
 .fruit {
   position: relative;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 220px;
   text-align: center;
   overflow: hidden;
   background-color: white;
+  border: 1px solid #dedede;
+  box-shadow: 0px 1px 1px 0px rgba(132, 132, 132, 0.2);
+  font-size: 1rem;
+  margin: 0 $medium $medium 0;
+  @extend .source-sans;
+
+  @media (max-width: 767px) {
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    min-width: 30%;
+
+    .emoji {
+      font-size: 30pt;
+    }
+  }
 
   &.editing {
     filter: blur(2px);

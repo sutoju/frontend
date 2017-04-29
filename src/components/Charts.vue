@@ -4,8 +4,7 @@
   
     <div class="container fluid">
 
-      <div class="filter-header">
-        <span class="container-title">Time</span>
+      <div class="filter-header fluid">
 
         <div>
           <div class="input-inline">
@@ -23,15 +22,13 @@
 
     </div>
   
-    <div class="container fluid rounded well box">
+    <div class="container rounded well box">
       <chart v-bind:options="chartOptions"
              v-bind:chartData="storeChartData"
              :height="400"></chart>
     </div>
 
-    <div class="container box separator"></div>
-
-    <pre class="container fluid well rounded">
+    <pre class="container well rounded">
       {{ storeChartData }}
     </pre>
   

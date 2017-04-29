@@ -1,7 +1,6 @@
 <template>
-  <div class="container rounded card box">
+  <div class="rounded card">
     <div class="title">{{ title }}</div>
-    <div class="separator"></div>
     <div class="content">
       <slot>
         <p>Empty card content</p>
@@ -24,7 +23,7 @@ export default {
 @import '../main.scss';
 .card {
   max-width: 400px;
-  border-radius: 14px;
+  border-radius: 10px;
 }
 
 .title {
