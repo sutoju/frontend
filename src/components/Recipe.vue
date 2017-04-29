@@ -75,7 +75,6 @@ export default {
   top: 0;
   margin: $large;
   font-size: 50pt;
-  z-index: 999;
   color: white;
 
   @media (max-width: 767px) {

@@ -67,14 +67,16 @@ const chartOptions = {
 
 const parseDifference = (values) => {
   let sum = 0
-  values.datasets[0].data = values.datasets[0].data
-  .filter(val => val.y > 0)
-  .map(val => {
-    sum += parseInt(val.y)
-    val.y = sum
-    return val
-  })
-  return values
+  if (values.datasets && values.datasets[0] && values.datasets[0].data) {
+    values.datasets[0].data = values.datasets[0].data
+    .filter(val => val.y > 0)
+    .map(val => {
+      sum += parseInt(val.y)
+      val.y = sum
+      return val
+    })
+    return values
+  }
 }
 
 const formattedDataset = (name, key, rawData) => {
@@ -88,12 +90,12 @@ const formattedDataset = (name, key, rawData) => {
           lineTension: 0,
           pointRadius: 0,
           cubicInterpolationMode: 'monotone',
-          data: rawData.length > 0 ? rawData.map(p => (
+          data: rawData.map(p => (
             {
               x: p.timestamp,
               y: p[key]
             }
-          )) : []
+          ))
         }
       ]
     }
@@ -122,8 +124,7 @@ export default {
       return formattedDataset('Weight', 'weight', this.weightData)
     },
     formattedDifferenceData () {
-      return parseDifference(
-        formattedDataset('Difference', 'difference', this.weightData))
+      return parseDifference(formattedDataset('Difference', 'difference', this.weightData))
     },
     ...mapGetters(['startTime', 'endTime', 'weightData'])
   },
