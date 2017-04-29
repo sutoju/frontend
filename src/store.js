@@ -30,7 +30,23 @@ const store = new Vuex.Store({
     setData: (state, data) => { state.data = data },
     createToast: (state, text) => { state.toasts.push({ text, firedAt: new Date().getSeconds() }) },
     hideToast: (state, toastId) => { state.toasts.find(t => t.id === toastId).hidden = true },
-    setFoodData: (state, data) => { state.foodData = data }
+    setFoodData: (state, data) => { state.foodData = data },
+    editFoodDataEntry: (state, { action, type }) => {
+      console.log(action, type)
+      const entry = state.foodData.find(f => f.type === type)
+      console.log(entry)
+      if (action === 'editing') {
+        entry['editing'] = true
+      } else {
+        if (entry) {
+          entry.count = action === 'add' ? entry.count + 1 : entry.count - 1
+          entry['editing'] = false
+        }
+        if (entry.count <= 0) {
+          state.foodData.splice(state.foodData.indexOf(entry), 1)
+        }
+      }
+    }
   },
   actions: {
     saveData (context, data) {
@@ -55,8 +71,34 @@ const store = new Vuex.Store({
         .then(json => context.commit('setData', json))
     },
     loadFoodData (context) {
-      api.getJSON('foodData')
+      api.getJSON('sortedFood')
         .then(json => context.commit('setFoodData', json))
+    },
+    editItem (context, command) {
+      // post to either submitItem or removeItem with type in body
+      // if success, remove from local foodData
+      const { action, type } = command
+      context.commit('editFoodDataEntry', { action: 'editing', type })
+      context.commit('editFoodDataEntry', { action, type })
+      if (action === 'add') {
+        return api.post('food/' + type, { type })
+          .then(res => {
+            console.log('post', res)
+            if (res.added === type) {
+              return true
+            }
+            return false
+          })
+      } else if (action === 'remove') {
+        return api.del('food/' + type)
+          .then(res => {
+            console.log('del', res)
+            if (res.type === type) {
+              return true
+            }
+            return false
+          })
+      }
     }
   }
 })

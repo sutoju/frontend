@@ -2,7 +2,11 @@
   <div class="container fluid">
     <div class="title-first">Charts</div>
   
-    <div class="">
+    <div class="container fluid">
+      <div class="container-header">
+        <div class="container-title">Time</div>
+      </div>
+
       <div class="input-group input-inline">
         <div class="input-label">start</div>
         <datepicker :value="startTime"></datepicker>
@@ -12,6 +16,7 @@
         <div class="input-label">end</div>
         <datepicker :value="endTime"></datepicker>
       </div>
+      
     </div>
   
     <div class="container rounded well box">
