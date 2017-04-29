@@ -23,12 +23,12 @@
     </div>
   
     <div class="container rounded well box">
-      <chart v-bind:options="chartOptions"
+      <chart chart v-bind:options="chartOptions"
              v-bind:chartData="storeChartData"
              :height="400"></chart>
     </div>
 
-    <pre class="container well rounded">
+    <pre class="container well rounded source-code">
       {{ storeChartData }}
     </pre>
   
