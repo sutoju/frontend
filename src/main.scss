@@ -16,64 +16,135 @@ $large: $small * 4;
 $radius_small: .2em;
 
 * {
-    outline: none;
+  outline: none;
 }
 
 .container {
-    padding: $medium;
-    margin: $medium;
+  padding: $medium;
+  margin: $medium;
+}
+
+.container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $medium 0;
+}
+
+.container-title {
+  font-size: 16pt;
+  font-weight: lighter;
 }
 
 .fluid {
-    margin: 0;
+  margin: 0;
 }
 
 .container-small {
-    padding: $small;
-    margin: $small;
+  padding: $small;
+  margin: $small;
 }
 
 .box {
-    border: 1px solid $dark_grey;
+  border: 1px solid $dark_grey;
 }
 
 .well {
-    background: $grey;
+  background: #f7f7f7;
+}
+
+.separator {
+ background-color: $grey;
+ height: 1px;
+}
+
+.rounded {
+  border-radius: $radius_small / 2;
 }
 
 .input-element {
-    margin: $small;
-    padding: $medium;
+  margin: $small;
+  padding: $medium;
 }
 
 .sans-serif {
   font-family: sans-serif;
 }
 
-.button {
-    @extend .input-element;
-    @extend .sans-serif;
+.input-group {
+  @extend .sans-serif;
+  display: inline-block;
+  border: 1px solid $dark_grey;
+  border-radius: $radius_small;
+  padding: $medium;
+  margin: $medium;
 
-    $color: black;
-    @include colorButton($color, $light_grey);
-    display: inline-block;
+  .input-label {
+    font-size: 14pt;
+    margin-bottom: $medium;
+    font-weight: lighter;
+  }
+
+  input {
+    color: #232323;
+    border: 1px solid $grey;
+    border-radius: $radius_small / 2;
+    padding: $small;
+    font-size: 16pt;
+  }
+
+}
+
+.input-inline {
+  // display: inline;
+}
+
+.text-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 16pt;
+  color: $accent;
+  padding: $small $medium;
+
+  &.highlighted {
     border-radius: $radius_small;
-    text-decoration: none;
+    background-color: $light_grey;
 
-    &:visited {
-        text-decoration: none;
-        color: $color;
+    &:active {
+      background-color: darken($light_grey, 10);
     }
+  }
+  
+}
+
+.button {
+  @extend .input-element;
+  @extend .sans-serif;
+  $color: black;
+  cursor: pointer;
+  border: none;
+  color: $black;
+  background-color: $light_grey;
+  display: inline-block;
+  border-radius: $radius_small;
+  text-decoration: none;
+  &:visited {
+    text-decoration: none;
+    color: $color;
+  }
+  &:active {
+    background-color: darken($light_grey, 10);
+  }
 }
 
 .title-first {
-  display: inline-block;
   margin: 0;
   padding: $medium;
   font-size: 22pt;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }

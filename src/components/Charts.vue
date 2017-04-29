@@ -1,12 +1,37 @@
 <template>
-  <div>
+  <div class="container fluid">
     <div class="title-first">Charts</div>
-    <chart v-bind:options="chartOptions" v-bind:chartData="chartData"></chart>
+  
+    <div class="">
+      <div class="input-group input-inline">
+        <div class="input-label">start</div>
+        <datepicker :value="startTime"></datepicker>
+      </div>
+  
+      <div class="input-group input-inline">
+        <div class="input-label">end</div>
+        <datepicker :value="endTime"></datepicker>
+      </div>
+    </div>
+  
+    <div class="container rounded well box">
+      <chart v-bind:options="chartOptions"
+             v-bind:chartData="chartData"
+             :height="400"></chart>
+    </div>
+
+    start: {{ startTime }}
+    end: {{ endTime }}
+  
   </div>
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker'
+import { mapGetters } from 'vuex'
+
 import Chart from './Chart'
+import Card from './Card'
 
 const chartData = {
   datasets: [
@@ -26,23 +51,34 @@ const chartData = {
 }
 
 const chartOptions = {
-  labels: ['label1', 'label2']
+  responsive: true,
+  maintainAspectRatio: false
 }
 
 export default {
   name: 'charts',
   components: {
-    Chart
+    Chart,
+    Card,
+    Datepicker
+  },
+  mounted () {
+    console.log('mounted')
   },
   data () {
     return {
       chartData,
       chartOptions
     }
+  },
+  computed: {
+    ...mapGetters(['startTime', 'endTime'])
   }
 }
 </script>
 
 <style lang="scss">
 @import '../main.scss';
+
+.filters {}
 </style>
