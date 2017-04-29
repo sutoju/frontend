@@ -5,7 +5,7 @@
     <div class="container fluid">
       <div class="container-header">
         <div class="container-title">Current food stock</div>
-        <button 
+        <button
           v-bind:class="{
             'text-button': !editMode,
             'text-button highlighted': editMode
