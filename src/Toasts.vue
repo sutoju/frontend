@@ -29,6 +29,7 @@ export default {
   position: absolute;
   bottom: 2 * $large;
   left: 2 * $large;
+  pointer-events: none;
 
   @media (max-width: 767px) {
     top: $large * 4;

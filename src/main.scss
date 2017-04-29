@@ -135,9 +135,6 @@ $radius_small: .2em;
   margin-right: $medium;
   border: 1px solid $dark_grey;
   border-radius: $radius_small;
-  * {
-    z-index: 999;
-  }
 
   @media (max-width: 767px) {
     display: flex;
@@ -175,7 +172,6 @@ $radius_small: .2em;
   border: none;
   font-size: 16pt;
   color: $accent;
-  z-index: 999;
 
   &.highlighted {
     // border-radius: $radius_small;
