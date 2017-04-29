@@ -22,14 +22,19 @@
 
     </div>
   
-    <div class="container rounded well box">
-      <chart v-bind:options="chartOptions"
-             v-bind:chartData="storeChartData"
+    <div class="container rounded box">
+      <div v-if="false" class="container-title">Waste amount history</div>
+      <chart :options="chartOptions"
+             :chartData="storeChartData"
              :height="400"></chart>
     </div>
 
     <pre class="container well rounded source-code">
       {{ storeChartData }}
+    </pre>
+
+    <pre class="container well rounded source-code">
+      {{ weightData }}
     </pre>
   
   </div>
@@ -45,10 +50,17 @@ import Card from './Card'
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  line: {
+    capBezierPoints: false
+  },
   scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
+    xAxes: [{
+      type: 'time',
+      position: 'bottom',
+      time: {
+        displayFormats: {
+          'millisecond': 'hh:mm:ss'
+        }
       }
     }]
   }
@@ -60,13 +72,17 @@ const formattedDataset = (name, rawData) => {
       datasets: [
         {
           label: name,
-          backgroundColor: '#8add8b',
-          data: rawData.map(p => (
+          borderColor: '#50cb82',
+          fill: false,
+          lineTension: 0,
+          pointRadius: 0,
+          cubicInterpolationMode: 'monotone',
+          data: rawData.length > 0 ? rawData.map(p => (
             {
               x: p.timestamp,
               y: p.weight
             }
-          ))
+          )) : []
         }
       ]
     }
@@ -92,9 +108,9 @@ export default {
   },
   computed: {
     storeChartData () {
-      return formattedDataset('Full data', this.$store.state.data)
+      return formattedDataset('Full data', this.weightData)
     },
-    ...mapGetters(['startTime', 'endTime'])
+    ...mapGetters(['startTime', 'endTime', 'weightData'])
   },
   methods: {
     ...mapActions(['setStartTime', 'setEndTime'])

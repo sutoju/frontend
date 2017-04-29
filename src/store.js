@@ -25,6 +25,7 @@ const store = new Vuex.Store({
   getters: {
     getVisibleToasts: state => state.toasts,
     startTime: state => new Date(state.startTime),
+    weightData: state => state.data,
     endTime: state => new Date(state.endTime),
     foodData: state => state.foodData,
     recipies: state => state.recipies,
