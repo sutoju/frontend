@@ -8,7 +8,8 @@
   
     <div class="recipe container round">
       <li class="ingredient"
-          v-for="ingredient in recipe">
+          v-for="ingredient in recipe"
+          :key="ingredient">
         {{ ingredient }}
       </li>
     </div>
@@ -28,7 +29,7 @@ export default {
         this.loadRecipeList()
       }
       if (!this.recipies[this.$route.params.id]) {
-        console.log('must load recipe ' + this.$route.params.id)
+        // console.log('must load recipe ' + this.$route.params.id)
         this.loadRecipe(this.$route.params.id)
       }
     }
@@ -36,9 +37,9 @@ export default {
   computed: {
     recipeMeta() {
       const recipe = this.recipeList.find(r => {
-        console.log(r.recipe_id, this.$route.params.id)
+        // console.log(r.recipe_id, this.$route.params.id)
         const asd = r.recipe_id === this.$route.params.id
-        console.log(asd)
+        // console.log(asd)
         return asd
       })
       if (recipe) {

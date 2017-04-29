@@ -125,7 +125,7 @@ export default {
     Datepicker
   },
   mounted () {
-    console.log('mounted')
+    // console.log('mounted')
     this.$store.dispatch('loadDataBetweenPoints')
   },
   computed: {
@@ -133,10 +133,10 @@ export default {
       return defaultChartOptions
     },
     formattedWeightData () {
-      return formattedDataset('Total food waste', 'weight', this.weightData)
+      return formattedDataset('Trash bin weight', 'weight', this.weightData)
     },
     formattedDifferenceData () {
-      return parseDifference(formattedDataset('Waste generated', 'difference', this.weightData))
+      return parseDifference(formattedDataset('Total food waste', 'difference', this.weightData))
     },
     ...mapGetters(['startTime', 'endTime', 'weightData'])
   },

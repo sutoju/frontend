@@ -31,22 +31,22 @@ export default {
   name: 'app',
   mounted () {
     /*eslint-disable */
-    console.log('banana', BANANA_COUNT_LIMIT)
+    // console.log('banana', BANANA_COUNT_LIMIT)
     /*eslint-enable */
     if (socket === undefined) {
       socket = api.getSocket('wss://sutoju-logic.eu-gb.mybluemix.net/ws/feed')
 
       socket.onopen = msg => {
-        console.log(msg)
-        console.log(socket)
+        // console.log(msg)
+        // console.log(socket)
         this.createToast({text: 'Socket opened'})
       }
 
       socket.onmessage = (message) => {
-        console.log(message)
+        // console.log(message)
         if (message.data && JSON.parse(message.data)) {
           const data = JSON.parse(message.data)
-          console.log('handle message: ', data)
+          // console.log('handle message: ', data)
           if (data.messageType) {
             if (data.messageType === 'food' && data.action) {
               const wording = data.action === 'add' ? 'Added' : data.action === 'remove' ? 'Removed' : data.action

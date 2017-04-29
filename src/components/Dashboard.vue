@@ -18,6 +18,7 @@
 
       <div class="food-list">
         <card class="fruit"
+          :key="food.type"
           v-for="food in foodData"
         >
           <div v-bind:class="{
@@ -81,7 +82,7 @@ export default {
   },
   data() {
     /*eslint-disable */
-    console.log(BANANA_TOGGLE)
+    // console.log(BANANA_TOGGLE)
     return {
       toastInput: 'qweqw',
       editMode: false,
@@ -135,17 +136,17 @@ export default {
       this.editMode = bool
     },
     isEditingFood(food) {
-      console.log(food)
+      // console.log(food)
     },
     editFoodItem(type, action) {
       /*eslint-disable */
       if (!!BANANA_COUNT_LIMIT && BANANA_COUNT_LIMIT !== undefined && BANANA_COUNT_LIMIT !== 'undefined') {
       /*eslint-enable */
-        console.log('yes banana')
-        console.log(type, action)
+        // console.log('yes banana')
+        // console.log(type, action)
         this.$store.dispatch('postFood', { action, type })
       } else {
-        console.log('no banana')
+        // console.log('no banana')
         this.$store.dispatch('editFood', { action, type })
       }
     },

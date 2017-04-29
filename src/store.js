@@ -9,7 +9,7 @@ Vue.use(Vuex)
 const TOAST_LIFETIME = 5000
 let nextToastId = 0
 
-const NOW = moment().subtract(1, 'days').valueOf()
+const NOW = moment().hours(0).valueOf()
 const WEEK = moment().add(7, 'days').valueOf()
 
 const store = new Vuex.Store({
@@ -47,10 +47,10 @@ const store = new Vuex.Store({
     },
     setFoodData: (state, data) => { state.foodData = data },
     editFoodDataEntry: (state, { action, type, expires }) => {
-      console.log(action, type)
+      // console.log(action, type)
       const entry = state.foodData.find(f => f.type === type)
       if (entry) {
-        console.log(entry)
+        // console.log(entry)
         if (action === 'editing') {
           entry['editing'] = true
         } else {
@@ -102,7 +102,7 @@ const store = new Vuex.Store({
       context.commit('setLoadingSomething', true)
       const start = context.state.startTime / 1000
       const end = context.state.endTime / 1000
-      console.log(start, end)
+      // console.log(start, end)
       api.getJSON(`weightDataBetween?start=${start}&end=${end}`)
         .then(json => {
           context.commit('setLoadingSomething', false)
@@ -128,7 +128,7 @@ const store = new Vuex.Store({
       if (action === 'add') {
         return api.post('food/' + type, { type })
           .then(res => {
-            console.log('post', res)
+            // console.log('post', res)
             if (res.added === type) {
               return true
             }
@@ -137,7 +137,7 @@ const store = new Vuex.Store({
       } else if (action === 'remove') {
         return api.del('food/' + type)
           .then(res => {
-            console.log('del', res)
+            // console.log('del', res)
             if (res.type === type) {
               return true
             }
@@ -164,7 +164,7 @@ const store = new Vuex.Store({
         })
     },
     loadRecipeList (context) {
-      console.log('loadRecipeList')
+      // console.log('loadRecipeList')
       return api.getJSON('recipes')
         .then(json => {
           context.commit('saveRecipeList', json.recipes)

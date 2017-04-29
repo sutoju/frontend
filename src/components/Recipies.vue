@@ -11,6 +11,7 @@
         <list-item
             v-if="recipe.title !== 'All Recipes'"
             v-for="recipe in recipeList"
+            :key="recipe.recipe_id"
             :title="recipe.title"
             :link="/recipe/ + recipe.recipe_id"
             :imagesrc="recipe.image_url"
@@ -32,7 +33,7 @@ export default {
     ListItem
   },
   mounted () {
-    console.log('mounted')
+    // console.log('mounted')
     this.setLoadingSomething(true)
     this.loadRecipeList()
       .then(() => this.setLoadingSomething(false))
