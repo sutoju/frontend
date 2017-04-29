@@ -46,7 +46,9 @@ const store = new Vuex.Store({
           state.foodData.splice(state.foodData.indexOf(entry), 1)
         }
       }
-    }
+    },
+    setStartTime: (state, timestamp) => { state.startTime = timestamp },
+    setEndTime: (state, timestamp) => { state.endTime = timestamp }
   },
   actions: {
     saveData (context, data) {
@@ -61,11 +63,11 @@ const store = new Vuex.Store({
       api.getJSON('weightData')
         .then(json => context.commit('setData', json))
     },
-    loadDataBetweenPoints (state, context) {
+    loadDataBetweenPoints (context) {
       // take points from store or use default ones
       // default start = now, default end = now + 7 days
-      const start = state.startTime
-      const end = state.endTime
+      const start = context.state.startTime / 1000
+      const end = context.state.endTime / 1000
       console.log(start, end)
       api.getJSON(`weightDataBetween?start=${start}&end=${end}`)
         .then(json => context.commit('setData', json))
@@ -99,6 +101,16 @@ const store = new Vuex.Store({
             return false
           })
       }
+    },
+    setStartTime(context, date) {
+      const timestamp = date.getTime()
+      context.commit('setStartTime', timestamp)
+      context.dispatch('loadDataBetweenPoints')
+    },
+    setEndTime(context, date) {
+      const timestamp = date.getTime()
+      context.commit('setEndTime', timestamp)
+      context.dispatch('loadDataBetweenPoints')
     }
   }
 })

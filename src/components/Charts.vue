@@ -10,12 +10,12 @@
         <div>
           <div class="input-inline">
             <span class="input-label">start</span>
-            <datepicker :value="startTime"></datepicker>
+            <datepicker v-on:selected="setStartTime" :value="startTime"></datepicker>
           </div>
     
           <div class="input-inline">
             <span class="input-label">end</span>
-            <datepicker :value="endTime"></datepicker>
+            <datepicker v-on:selected="setEndTime" :value="endTime"></datepicker>
           </div>
         </div>
 
@@ -31,13 +31,17 @@
 
     start: {{ startTime }}
     end: {{ endTime }}
+
+    <pre>
+      {{ storeChartData }}
+    </pre>
   
   </div>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 import Chart from './Chart'
 import Card from './Card'
@@ -81,7 +85,13 @@ export default {
     }
   },
   computed: {
+    storeChartData () {
+      return this.$store.state.data
+    },
     ...mapGetters(['startTime', 'endTime'])
+  },
+  methods: {
+    ...mapActions(['setStartTime', 'setEndTime'])
   }
 }
 </script>

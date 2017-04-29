@@ -35,7 +35,7 @@ $radius_small: .2em;
   display: flex;
   align-items: center;
   font-weight: lighter;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .container-title {
@@ -109,7 +109,6 @@ $radius_small: .2em;
   margin-left: $medium;
   border: 1px solid $dark_grey;
   border-radius: $radius_small;
-  overflow: hidden;
 
   .input-label {
     padding: 0 $medium;

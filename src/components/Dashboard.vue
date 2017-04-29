@@ -16,13 +16,6 @@
         </button>
       </div>
 
-      <div class="filter-header">
-        <div class="input-inline">
-          <span class="input-label">input</span>
-          <input />
-        </div>
-      </div>
-
       <div class="food-list container fluid">
         <card class="fruit"
           v-for="food in foodData"
