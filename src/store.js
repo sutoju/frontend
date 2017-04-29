@@ -6,7 +6,7 @@ import * as api from './api'
 
 Vue.use(Vuex)
 
-const TOAST_LIFETIME = 3000
+const TOAST_LIFETIME = 5000
 let nextToastId = 0
 
 const NOW = moment().subtract(1, 'days').valueOf()
@@ -21,30 +21,40 @@ const store = new Vuex.Store({
     toasts: []
   },
   getters: {
-    getVisibleToasts: (state, time) => state.toasts.filter(t => !t.hidden),
+    getVisibleToasts: state => state.toasts,
     startTime: state => new Date(state.startTime),
     endTime: state => new Date(state.endTime),
     foodData: state => state.foodData
   },
   mutations: {
     setData: (state, data) => { state.data = data },
-    createToast: (state, text) => { state.toasts.push({ text, firedAt: new Date().getSeconds() }) },
-    hideToast: (state, toastId) => { state.toasts.find(t => t.id === toastId).hidden = true },
+    addDataPoint: (state, data) => { state.data.push(data) },
+    createToast: (state, { id, text }) => { state.toasts.push({ id, text, firedAt: moment().valueOf() }) },
+    hideToast: (state, toastId) => {
+      const toast = state.toasts.find(t => t.id === toastId)
+      if (toast) {
+        state.toasts.splice(state.toasts.indexOf(toast), 1)
+      }
+    },
     setFoodData: (state, data) => { state.foodData = data },
-    editFoodDataEntry: (state, { action, type }) => {
+    editFoodDataEntry: (state, { action, type, expires }) => {
       console.log(action, type)
       const entry = state.foodData.find(f => f.type === type)
-      console.log(entry)
-      if (action === 'editing') {
-        entry['editing'] = true
+      if (entry) {
+        console.log(entry)
+        if (action === 'editing') {
+          entry['editing'] = true
+        } else {
+          if (entry) {
+            entry.count = action === 'add' ? entry.count + 1 : entry.count - 1
+            entry['editing'] = false
+          }
+          if (entry.count <= 0) {
+            state.foodData.splice(state.foodData.indexOf(entry), 1)
+          }
+        }
       } else {
-        if (entry) {
-          entry.count = action === 'add' ? entry.count + 1 : entry.count - 1
-          entry['editing'] = false
-        }
-        if (entry.count <= 0) {
-          state.foodData.splice(state.foodData.indexOf(entry), 1)
-        }
+        state.foodData.push({ type, expires, count: 1 })
       }
     },
     setStartTime: (state, timestamp) => { state.startTime = timestamp },
@@ -53,6 +63,9 @@ const store = new Vuex.Store({
   actions: {
     saveData (context, data) {
       context.commit('saveData', data)
+    },
+    addDataPoint (context, data) {
+      context.commit('addDataPoint', data)
     },
     createToast (context, text) {
       const id = nextToastId++
@@ -76,7 +89,11 @@ const store = new Vuex.Store({
       api.getJSON('sortedFood')
         .then(json => context.commit('setFoodData', json))
     },
-    editItem (context, command) {
+    editFood (context, command) {
+      const { action, type, expires } = command
+      context.commit('editFoodDataEntry', { action, type, expires })
+    },
+    postFood (context, command) {
       // post to either submitItem or removeItem with type in body
       // if success, remove from local foodData
       const { action, type } = command

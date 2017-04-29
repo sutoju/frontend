@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Toasts from './Toasts'
 import * as api from './api.js'
 import './main.scss'
@@ -27,18 +28,41 @@ let socket
 export default {
   name: 'app',
   mounted () {
-    if (!socket) {
-      socket = api.getSocket('ws://sutoju-logic.eu-gb.mybluemix.net/ws/weights-feed')
-      socket.onopen = event => console.log('on open', event)
+    if (socket === undefined) {
+      socket = api.getSocket('ws://sutoju-logic.eu-gb.mybluemix.net/ws/feed')
+
+      socket.onopen = msg => {
+        console.log(msg)
+        console.log(socket)
+        this.createToast('Socket opened')
+      }
+
       socket.onmessage = (message) => {
-        if (message.data && JSON.parse(message.data).weight) {
-          console.log('should add datapoint: ', JSON.parse(message.data))
+        console.log(message)
+        if (message.data && JSON.parse(message.data)) {
+          const data = JSON.parse(message.data)
+          console.log('handle message: ', data)
+          if (data.messageType) {
+            if (data.messageType === 'food' && data.action) {
+              this.editFood({ action: data.action, type: data.type, expires: data.expires })
+              this.createToast(data.action + 'ed one ' + data.type)
+            } else if (data.messageType === 'weight' && data.weight) {
+              const { messageType, ...dataPoint } = data
+              this.addDataPoint(dataPoint)
+              this.createToast('Added datapoint ' + messageType)
+            }
+          }
         }
       }
+
+      socket.onerror = error => this.createToast('Socket error: ' + error)
     }
   },
   components: {
     Toasts
+  },
+  methods: {
+    ...mapActions(['addDataPoint', 'createToast', 'editFood'])
   }
 }
 </script>

@@ -66,7 +66,6 @@ export default {
     Card
   },
   mounted() {
-    console.log('mounted')
     this.loadFoodData()
   },
   data() {
@@ -93,6 +92,10 @@ export default {
           return '🥒'
         case 'apple':
           return '🍎'
+        case 'orange':
+          return '🍊'
+        default:
+          return '🍽️'
       }
     },
     setEditMode(bool) {
@@ -103,7 +106,7 @@ export default {
     },
     editFoodItem(type, action) {
       console.log(type, action)
-      this.$store.dispatch('editItem', { action, type })
+      this.$store.dispatch('postFood', { action, type })
         .then(success => {
 
         })
