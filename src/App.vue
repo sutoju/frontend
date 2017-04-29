@@ -50,7 +50,7 @@ export default {
           if (data.messageType) {
             if (data.messageType === 'food' && data.action) {
               this.createToast({text: data.action + ' ' + data.type, className: 'success'})
-              this.$store.dispatch('loadRecipeList')
+              // this.$store.dispatch('loadRecipeList')
               this.editFood({ action: data.action, type: data.type, expires: data.expires })
             } else if (data.messageType === 'weight' && data.weight) {
               const { messageType, ...dataPoint } = data

@@ -25,8 +25,13 @@
           'blurred': editMode
           }">
             <div class="fruit-title">{{ food.type }}</div>
-            <div class="emoji fruit-picture">
-            {{ formatEmoji(food.type) }}
+            <div v-if="useEmojis" class="emoji fruit-picture">
+              {{ formatEmoji(food.type) }}
+            </div>
+            <div v-if="!useEmojis"
+              class="fruit-picture"
+              v-bind:style="{ 'background-image': 'url(' + getPictureURL(food.type) + ')' }"
+            >
             </div>
             <div class="fruit-info">
               <span class="fruit-count">{{ 'x' + food.count }}</span>
@@ -58,6 +63,12 @@ import 'vue-awesome/icons/minus'
 import 'vue-awesome/icons/calendar'
 import 'vue-awesome/icons/circle-o-notch'
 
+import apple from '../assets/apple.png'
+import banana from '../assets/banana.png'
+import cucumber from '../assets/cucumber.png'
+import orange from '../assets/orange.png'
+import plate from '../assets/plate.png'
+
 import Card from './Card'
 
 export default {
@@ -71,7 +82,10 @@ export default {
   data() {
     return {
       toastInput: 'qweqw',
-      editMode: false
+      editMode: false,
+      /*eslint-disable */
+      useEmojis: BANANA_TOGGLE || false
+      /*eslint-enable */
     }
   },
   computed: {
@@ -98,6 +112,22 @@ export default {
           return '🍍'
         default:
           return '🍽️'
+      }
+    },
+    getPictureURL(type) {
+      switch (type) {
+        case 'banana':
+          return banana
+        case 'cucumber':
+          return cucumber
+        case 'apple':
+          return apple
+        case 'orange':
+          return orange
+        case 'ananas':
+          return plate
+        default:
+          return plate
       }
     },
     setEditMode(bool) {
@@ -160,7 +190,7 @@ export default {
     }
 
     .emoji {
-      font-size: 20pt;
+      font-size: 36pt;
     }
 
     .fruit-info {
@@ -177,7 +207,25 @@ export default {
   filter: blur(6px);
 }
 
-.fruit-image {}
+.fruit-container {
+  // position: relative;
+}
+
+.fruit-picture {
+  height: 80px;
+  padding: $large;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%;
+
+  @media (max-width: 767px) {
+    height: 46px;
+    padding: 0;
+    margin-top: -4px;
+    margin-bottom: 4px;
+    background-size: 45%;
+  }
+}
 
 .fruit-count {
   border-radius: 13px;
@@ -185,6 +233,10 @@ export default {
   color: white;
   padding: 3px 10px;
   font-size: 13pt;
+
+  @media (max-width: 767px) {
+    font-size: 10pt;
+  }
 }
 
 .fruit-title {
@@ -217,7 +269,7 @@ export default {
     align-items: center;
 
     .actions-type {
-      margin-top: 5px;
+      margin-top: 0px;
       font-size: 18pt;
       text-transform: capitalize;
 

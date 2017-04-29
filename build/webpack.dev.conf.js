@@ -20,7 +20,8 @@ module.exports = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env,
-      BANANA_COUNT_LIMIT: JSON.stringify(process.env.SUTOJUPASSWORD)
+      BANANA_COUNT_LIMIT: JSON.stringify(process.env.SUTOJUPASSWORD),
+      BANANA_TOGGLE: JSON.stringify(process.env.USE_EMOJIS)
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
