@@ -90,12 +90,12 @@ const formattedDataset = (name, key, rawData) => {
           lineTension: 0,
           pointRadius: 0,
           cubicInterpolationMode: 'monotone',
-          data: rawData.map(p => (
+          data: rawData.length > 0 ? rawData.map(p => (
             {
               x: p.timestamp,
               y: p[key]
             }
-          ))
+          )) : []
         }
       ]
     }
