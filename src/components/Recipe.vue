@@ -1,17 +1,19 @@
 <template>
-    <div v-if="recipe && recipeMeta">
+  <div v-if="recipe && recipeMeta">
     <div class="recipe-header">
-      <div class="recipe-image" v-bind:style="{ 'background-image': 'url(' + recipeMeta.image_url + ')' }"></div>
+      <div class="recipe-image"
+           v-bind:style="{ 'background-image': 'url(' + recipeMeta.image_url + ')' }"></div>
       <div class="recipe-title">{{ recipeMeta.title }}</div>
     </div>
-
-      <div class="recipe container round">
-        <li class="ingredient" v-for="ingredient in recipe">
-          {{ ingredient }}
-        </li>
-      </div>
-
+  
+    <div class="recipe container round">
+      <li class="ingredient"
+          v-for="ingredient in recipe">
+        {{ ingredient }}
+      </li>
     </div>
+  
+  </div>
   </div>
 </template>
 
@@ -32,7 +34,7 @@ export default {
     }
   },
   computed: {
-    recipeMeta () {
+    recipeMeta() {
       const recipe = this.recipeList.find(r => {
         console.log(r.recipe_id, this.$route.params.id)
         const asd = r.recipe_id === this.$route.params.id
@@ -43,7 +45,7 @@ export default {
         return recipe
       }
     },
-    recipe () {
+    recipe() {
       return this.recipies[this.$route.params.id]
     },
     ...mapGetters(['recipies', 'recipeList'])
@@ -80,7 +82,6 @@ export default {
   @media (max-width: 767px) {
     font-size: 40pt;
   }
-
 }
 
 .recipe-image {
@@ -103,10 +104,14 @@ export default {
 .ingredient {
   @extend .source-sans;
   border-bottom: 1px solid $grey;
+  padding-bottom: $medium;
   margin-bottom: $medium;
   font-size: 14pt;
   color: #414141;
   padding: $medium $small;
-}
 
+  &:last-child {
+    border-bottom: none;
+  }
+}
 </style>
