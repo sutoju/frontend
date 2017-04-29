@@ -1,11 +1,11 @@
 <template>
     <div class="container fluid">
-    <div class="title-first">Recipes</div>
+      <div class="title-first">Recipes</div>
   
-    <div class="container fluid">
-      <div class="container-header">
-        <div class="container-title">Available with current items</div>
-      </div>
+      <div class="container fluid">
+        <div class="container-header">
+          <div class="container-title">Available with current items</div>
+        </div>
 
       <div class="recipe-list">
         <list-item
@@ -33,13 +33,15 @@ export default {
   },
   mounted () {
     console.log('mounted')
+    this.setLoadingSomething(true)
     this.loadRecipeList()
+      .then(() => this.setLoadingSomething(false))
   },
   computed: {
     ...mapGetters(['recipies', 'recipeList'])
   },
   methods: {
-    ...mapActions(['loadRecipeList', 'loadRecipe'])
+    ...mapActions(['loadRecipeList', 'loadRecipe', 'setLoadingSomething'])
   }
 }
 

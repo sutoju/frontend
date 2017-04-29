@@ -39,7 +39,7 @@ export default {
       socket.onopen = msg => {
         console.log(msg)
         console.log(socket)
-        this.createToast('Socket opened')
+        this.createToast({text: 'Socket opened'})
       }
 
       socket.onmessage = (message) => {
@@ -49,18 +49,19 @@ export default {
           console.log('handle message: ', data)
           if (data.messageType) {
             if (data.messageType === 'food' && data.action) {
-              this.createToast(data.action + ' ' + data.type)
+              this.createToast({text: data.action + ' ' + data.type, className: 'success'})
+              this.$store.dispatch('loadRecipeList')
               this.editFood({ action: data.action, type: data.type, expires: data.expires })
             } else if (data.messageType === 'weight' && data.weight) {
               const { messageType, ...dataPoint } = data
-              this.createToast('Added datapoint ' + messageType)
+              this.createToast({text: 'Added datapoint ' + messageType, className: 'success'})
               this.addDataPoint(dataPoint)
             }
           }
         }
       }
 
-      socket.onerror = error => this.createToast('Socket error: ' + error)
+      socket.onerror = error => this.createToast({text: 'Socket error: ' + error, className: 'error'})
     }
   },
   components: {
@@ -71,7 +72,7 @@ export default {
     ...mapGetters(['loadingSomething'])
   },
   methods: {
-    ...mapActions(['addDataPoint', 'createToast', 'editFood'])
+    ...mapActions(['addDataPoint', 'createToast', 'editFood', 'loadRecipeList'])
   }
 }
 </script>

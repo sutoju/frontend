@@ -38,7 +38,7 @@ const store = new Vuex.Store({
     setLoadingSomething: (state, bool) => { state.loadingSomething = bool },
     setData: (state, data) => { state.data = data },
     addDataPoint: (state, data) => { state.data.push(data) },
-    createToast: (state, { id, text }) => { state.toasts.push({ id, text, firedAt: moment().valueOf() }) },
+    createToast: (state, { id, text, className }) => { state.toasts.push({ id, text, className, firedAt: moment().valueOf() }) },
     hideToast: (state, toastId) => {
       const toast = state.toasts.find(t => t.id === toastId)
       if (toast) {
@@ -83,9 +83,9 @@ const store = new Vuex.Store({
     addDataPoint (context, data) {
       context.commit('addDataPoint', data)
     },
-    createToast (context, text) {
+    createToast (context, { text, className = 'default' }) {
       const id = nextToastId++
-      context.commit('createToast', { id, text })
+      context.commit('createToast', { id, text, className })
       setTimeout(() => { context.commit('hideToast', id) }, TOAST_LIFETIME)
     },
     loadAllData (context) {
@@ -164,11 +164,10 @@ const store = new Vuex.Store({
         })
     },
     loadRecipeList (context) {
-      context.commit('setLoadingSomething', true)
-      api.getJSON('recipes')
+      console.log('loadRecipeList')
+      return api.getJSON('recipes')
         .then(json => {
           context.commit('saveRecipeList', json.recipes)
-          context.commit('setLoadingSomething', false)
         })
     }
   }
