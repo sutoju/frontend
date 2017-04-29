@@ -23,7 +23,7 @@
     </div>
   
     <div class="container rounded well box">
-      <chart chart v-bind:options="chartOptions"
+      <chart v-bind:options="chartOptions"
              v-bind:chartData="storeChartData"
              :height="400"></chart>
     </div>

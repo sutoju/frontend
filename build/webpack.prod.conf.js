@@ -11,6 +11,8 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var env = config.build.env
 
+console.log(process.env.SUTOJUPASSWORD)
+
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -27,7 +29,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': env,
+      BANANA_COUNT_LIMIT: JSON.stringify(process.env.SUTOJUPASSWORD)
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

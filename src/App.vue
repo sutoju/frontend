@@ -27,6 +27,9 @@ let socket
 export default {
   name: 'app',
   mounted () {
+    /*eslint-disable */
+    console.log('banana', BANANA_COUNT_LIMIT)
+    /*eslint-enable */
     if (socket === undefined) {
       socket = api.getSocket('ws://sutoju-logic.eu-gb.mybluemix.net/ws/feed')
 
@@ -43,12 +46,12 @@ export default {
           console.log('handle message: ', data)
           if (data.messageType) {
             if (data.messageType === 'food' && data.action) {
-              this.editFood({ action: data.action, type: data.type, expires: data.expires })
               this.createToast(data.action + 'ed one ' + data.type)
+              this.editFood({ action: data.action, type: data.type, expires: data.expires })
             } else if (data.messageType === 'weight' && data.weight) {
               const { messageType, ...dataPoint } = data
-              this.addDataPoint(dataPoint)
               this.createToast('Added datapoint ' + messageType)
+              this.addDataPoint(dataPoint)
             }
           }
         }

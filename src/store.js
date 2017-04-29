@@ -97,8 +97,6 @@ const store = new Vuex.Store({
       // post to either submitItem or removeItem with type in body
       // if success, remove from local foodData
       const { action, type } = command
-      context.commit('editFoodDataEntry', { action: 'editing', type })
-      context.commit('editFoodDataEntry', { action, type })
       if (action === 'add') {
         return api.post('food/' + type, { type })
           .then(res => {
