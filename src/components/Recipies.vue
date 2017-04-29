@@ -1,6 +1,6 @@
 <template>
     <div class="container fluid">
-    <div class="title-first">Recipies</div>
+    <div class="title-first">Recipes</div>
   
     <div class="container fluid">
       <div class="container-header">

@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link class="nav-link" :to="'/'">dashboard</router-link>
-      <router-link class="nav-link" :to="'/recipies'">recipies</router-link>
+      <router-link class="nav-link" :to="'/recipies'">recipes</router-link>
       <router-link class="nav-link" :to="'/chart'">waste history</router-link>
     </nav>
   

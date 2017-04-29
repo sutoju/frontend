@@ -21,7 +21,7 @@ export default new Router({
     },
     {
       path: '/recipies',
-      name: 'Recipies',
+      name: 'Recipes',
       component: Recipies
     },
     {

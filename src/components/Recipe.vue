@@ -64,15 +64,31 @@ export default {
 }
 
 .recipe-title {
+  @extend .source-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: $large;
+  font-size: 50pt;
   z-index: 999;
   color: white;
+
+  @media (max-width: 767px) {
+    font-size: 40pt;
+  }
+
 }
 
 .recipe-image {
   top: -10px;
   left: -10px;
   position: absolute;
-  filter: blur(5px);
+  filter: brightness(0.8) blur(4px);
   width: 120%;
   height: 120%;
   background-repeat: no-repeat;
@@ -81,11 +97,18 @@ export default {
   background-size: 100%;
 }
 
+.recipe {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
 .ingredient {
   @extend .source-sans;
-  font-size: 16pt;
+  border-bottom: 1px solid $grey;
+  margin-bottom: $medium;
+  font-size: 14pt;
   color: #414141;
-  padding: $small;
+  padding: $medium $small;
 }
 
 </style>

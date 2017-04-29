@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" @click="pushRoute">
     <img ref="recipeImage" class="image" :src="imagesrc"/>
     <router-link :to="link" class="title">{{ title }}</router-link>
   </div>
@@ -31,6 +31,11 @@ export default {
     // const el = this.$refs.recipeImage
     // getSwatch(el)
   },
+  methods: {
+    pushRoute() {
+      this.$router.push(this.link)
+    }
+  },
   computed: {
     words: function() {
       if (this.title) {
@@ -47,7 +52,7 @@ export default {
 @import '../main.scss';
 
 .item {
-  @extend .source-sans;
+  @extend .source-serif;
   position: relative;
   display: flex;
   justify-content: flex-start;
