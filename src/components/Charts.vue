@@ -1,7 +1,7 @@
 <template>
   <div class="container fluid">
     <div class="title-first">Charts</div>
-  
+
     <div class="container fluid">
 
       <div class="filter-header fluid">
@@ -11,7 +11,7 @@
             <span class="input-label">from</span>
             <datepicker v-on:selected="setStartTime" :value="startTime"></datepicker>
           </div>
-    
+
           <div class="input-inline">
             <span class="input-label">to</span>
             <datepicker v-on:selected="setEndTime" :value="endTime"></datepicker>
@@ -21,7 +21,7 @@
       </div>
 
     </div>
-  
+
     <div class="container rounded box">
       <div v-if="false" class="container-title">Waste amount history</div>
       <chart :options="chartOptions"
@@ -43,7 +43,7 @@
     <pre class="container well rounded source-code">
       {{ weightData }}
     </pre>
-  
+
   </div>
 </template>
 
@@ -71,6 +71,18 @@ const chartOptions = {
       }
     }]
   }
+}
+
+const parseDifference = (values) => {
+  let sum = 0
+  values.datasets[0].data = values.datasets[0].data
+  .filter(val => val.y > 0)
+  .map(val => {
+    sum += parseInt(val.y)
+    val.y = sum
+    return val
+  })
+  return values
 }
 
 const formattedDataset = (name, key, rawData) => {
@@ -118,7 +130,8 @@ export default {
       return formattedDataset('Weight', 'weight', this.weightData)
     },
     formattedDifferenceData () {
-      return formattedDataset('Difference', 'difference', this.weightData)
+      return parseDifference(
+        formattedDataset('Difference', 'difference', this.weightData))
     },
     ...mapGetters(['startTime', 'endTime', 'weightData'])
   },
