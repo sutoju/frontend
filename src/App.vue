@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link class="nav-link" :to="'/'">home</router-link>
-      <router-link class="nav-link" :to="'/dashboard'">dashboard</router-link>
+      <router-link class="nav-link" :to="'/'">dashboard</router-link>
       <router-link class="nav-link" :to="'/chart'">charts</router-link>
     </nav>
   
