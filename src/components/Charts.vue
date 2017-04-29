@@ -23,16 +23,15 @@
 
     </div>
   
-    <div class="container rounded well box">
+    <div class="container fluid rounded well box">
       <chart v-bind:options="chartOptions"
-             v-bind:chartData="chartData"
+             v-bind:chartData="storeChartData"
              :height="400"></chart>
     </div>
 
-    start: {{ startTime }}
-    end: {{ endTime }}
+    <div class="container box separator"></div>
 
-    <pre>
+    <pre class="container fluid well rounded">
       {{ storeChartData }}
     </pre>
   
@@ -46,26 +45,36 @@ import { mapGetters, mapActions } from 'vuex'
 import Chart from './Chart'
 import Card from './Card'
 
-const chartData = {
-  datasets: [
-    {
-      label: 'dataset 1',
-      backgroundColor: '#79f8aa',
-      data: [
-        { x: 0, y: 10 },
-        { x: 1, y: 12 },
-        { x: 2, y: 10 },
-        { x: 3, y: 13 },
-        { x: 4, y: 12 },
-        { x: 5, y: 9 }
-      ]
-    }
-  ]
-}
-
 const chartOptions = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  }
+}
+
+const formattedDataset = (name, rawData) => {
+  if (rawData.length > 0) {
+    return {
+      datasets: [
+        {
+          label: name,
+          backgroundColor: '#8add8b',
+          data: rawData.map(p => (
+            {
+              x: p.timestamp,
+              y: p.weight
+            }
+          ))
+        }
+      ]
+    }
+  }
+  return []
 }
 
 export default {
@@ -77,16 +86,16 @@ export default {
   },
   mounted () {
     console.log('mounted')
+    this.$store.dispatch('loadDataBetweenPoints')
   },
   data () {
     return {
-      chartData,
       chartOptions
     }
   },
   computed: {
     storeChartData () {
-      return this.$store.state.data
+      return formattedDataset('Full data', this.$store.state.data)
     },
     ...mapGetters(['startTime', 'endTime'])
   },

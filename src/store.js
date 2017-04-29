@@ -9,7 +9,7 @@ Vue.use(Vuex)
 const TOAST_LIFETIME = 3000
 let nextToastId = 0
 
-const NOW = moment().valueOf()
+const NOW = moment().subtract(1, 'days').valueOf()
 const WEEK = moment().add(7, 'days').valueOf()
 
 const store = new Vuex.Store({

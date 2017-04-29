@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <nav>
-      <router-link class="button" :to="'/'">home</router-link>
-      <router-link class="button" :to="'/dashboard'">dashboard</router-link>
-      <router-link class="button" :to="'/chart'">charts</router-link>
+      <router-link class="nav-link" :to="'/'">home</router-link>
+      <router-link class="nav-link" :to="'/dashboard'">dashboard</router-link>
+      <router-link class="nav-link" :to="'/chart'">charts</router-link>
     </nav>
   
     <div class="child container fluid">
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
 
     <toasts></toasts>
@@ -30,7 +32,6 @@ export default {
 <style scoped lang="scss">
 @import './main.scss';
 #app {
-  border: 20px solid yellow;
 }
 
 .child {
@@ -38,9 +39,28 @@ export default {
   flex: 1;
 }
 
+.nav-link {
+  @extend .sans-serif;
+  color: $accent;
+  padding: $medium;
+  margin: $small;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &.router-link-exact-active {
+    border-bottom: 1px solid $accent;
+  }
+
+  &:visited {
+    text-decoration: none;
+    color: $accent;
+  }
+}
+
 nav {
   padding: $medium;
-  border-bottom: 1px solid $dark_grey;
+  border-bottom: 1px solid #dedede;
+  box-shadow: 0px 1px 1px 0px rgba(132, 132, 132, 0.2);
 }
 
 </style>
