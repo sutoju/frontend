@@ -107,11 +107,16 @@ export default {
       console.log(food)
     },
     editFoodItem(type, action) {
-      console.log(type, action)
-      this.$store.dispatch('postFood', { action, type })
-        .then(success => {
-
-        })
+      /*eslint-disable */
+      if (!!BANANA_COUNT_LIMIT && BANANA_COUNT_LIMIT !== undefined && BANANA_COUNT_LIMIT !== 'undefined') {
+      /*eslint-enable */
+        console.log('yes banana')
+        console.log(type, action)
+        this.$store.dispatch('postFood', { action, type })
+      } else {
+        console.log('no banana')
+        this.$store.dispatch('editFood', { action, type })
+      }
     },
     ...mapActions(['createToast', 'loadFoodData'])
   }
