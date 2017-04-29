@@ -91,7 +91,7 @@ const formattedDataset = (name, key, rawData) => {
       datasets: [
         {
           label: name,
-          borderColor: '#50cb82',
+          borderColor: key === 'difference' ? '#50cb82' : '#cb5065',
           fill: false,
           lineTension: 0,
           pointRadius: 0,
