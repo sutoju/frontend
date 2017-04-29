@@ -94,10 +94,10 @@ export default {
   },
   methods: {
     formatTime(timestamp) {
-      return moment().milliseconds(timestamp).format('DD/MM/YYYY')
+      return moment.unix(timestamp).format('DD/MM/YYYY')
     },
     formatDuration(timestamp) {
-      return moment().milliseconds(timestamp).fromNow()
+      return moment.unix(timestamp).fromNow()
     },
     formatEmoji(type) {
       switch (type) {
