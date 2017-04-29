@@ -73,11 +73,6 @@ const defaultChartOptions = {
       position: 'bottom',
       gridLines: {
         display: true
-      },
-      time: {
-        displayFormats: {
-          'millisecond': 'hh:mm:ss'
-        }
       }
     }]
   }
@@ -110,7 +105,7 @@ const formattedDataset = (name, key, rawData) => {
           cubicInterpolationMode: 'monotone',
           data: rawData.length > 0 ? rawData.map(p => (
             {
-              x: p.timestamp,
+              x: p.timestamp * 1000,
               y: p[key]
             }
           )) : []
