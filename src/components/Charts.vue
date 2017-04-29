@@ -23,26 +23,18 @@
     </div>
 
     <div class="container rounded box">
-      <div v-if="false" class="container-title">Waste amount history</div>
-      <chart :options="chartOptions"
-             :chartData="formattedWeightData"
-             :height="400"></chart>
-    </div>
-
-    <div class="container rounded box">
       <div v-if="false" class="container-title">Waste difference history</div>
       <chart :options="chartOptions"
              :chartData="formattedDifferenceData"
              :height="400"></chart>
     </div>
 
-    <!--<pre class="container well rounded source-code">
-      {{ formattedWeightData }}
-    </pre>
-
-    <pre class="container well rounded source-code">
-      {{ weightData }}
-    </pre>-->
+    <div class="container rounded box">
+      <div v-if="false" class="container-title">Waste amount history</div>
+      <chart :options="chartOptions"
+             :chartData="formattedWeightData"
+             :height="400"></chart>
+    </div>
 
   </div>
 </template>

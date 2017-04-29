@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Charts from '@/components/Charts'
 import Recipies from '@/components/Recipies'
+import Recipe from '@/components/Recipe'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/recipies',
       name: 'Recipies',
       component: Recipies
+    },
+    {
+      path: '/recipe/:id',
+      name: 'Recipe',
+      component: Recipe
     }
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <img ref="recipeImage" class="image" :src="imagesrc"/>
-    <div class="title">{{ title }}</div>
+    <router-link :to="link" class="title">{{ title }}</router-link>
   </div>
 </template>
 
@@ -24,9 +24,10 @@
 */
 
 export default {
-  props: ['title', 'imagesrc'],
+  props: ['title', 'link', 'imagesrc'],
   name: 'list-item',
   mounted () {
+    console.log(this.title, this.link)
     // const el = this.$refs.recipeImage
     // getSwatch(el)
   },
@@ -69,6 +70,7 @@ export default {
   }
 
   .title {
+    text-decoration: none;
     position: absolute;
     top: 0;
     left: 0;

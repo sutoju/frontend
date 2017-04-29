@@ -6,7 +6,7 @@
       <router-link class="nav-link" :to="'/chart'">waste history</router-link>
     </nav>
   
-    <div class="child container fluid">
+    <div class="child">
       <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>

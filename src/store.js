@@ -29,6 +29,7 @@ const store = new Vuex.Store({
     endTime: state => new Date(state.endTime),
     foodData: state => state.foodData,
     recipies: state => state.recipies,
+    getRecipe: (state, id) => state.recipies[id],
     recipeList: state => state.recipeList
   },
   mutations: {
@@ -64,7 +65,9 @@ const store = new Vuex.Store({
     },
     setStartTime: (state, timestamp) => { state.startTime = timestamp },
     setEndTime: (state, timestamp) => { state.endTime = timestamp },
-    saveRecipe: (state, { id, recipe }) => { state.recipies[id] = recipe },
+    saveRecipe: (state, { id, recipe }) => {
+      state.recipies = { [id]: recipe, ...state.recipies }
+    },
     saveRecipeList: (state, list) => { state.recipeList = list }
   },
   actions: {
@@ -136,7 +139,7 @@ const store = new Vuex.Store({
     },
     loadRecipe (context, id) {
       api.getJSON('recipes/' + id)
-        .then(json => context.commit('saveRecipe', { id, json }))
+        .then(json => context.commit('saveRecipe', { id, recipe: json.ingredients }))
     },
     loadRecipeList (context, id) {
       api.getJSON('recipes')

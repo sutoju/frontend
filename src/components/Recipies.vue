@@ -12,6 +12,7 @@
             v-if="recipe.title !== 'All Recipes'"
             v-for="recipe in recipeList"
             :title="recipe.title"
+            :link="/recipe/ + recipe.recipe_id"
             :imagesrc="recipe.image_url"
           >
         </list-item>
