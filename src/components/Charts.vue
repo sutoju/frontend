@@ -25,12 +25,19 @@
     <div class="container rounded box">
       <div v-if="false" class="container-title">Waste amount history</div>
       <chart :options="chartOptions"
-             :chartData="storeChartData"
+             :chartData="formattedWeightData"
+             :height="400"></chart>
+    </div>
+
+    <div class="container rounded box">
+      <div v-if="false" class="container-title">Waste difference history</div>
+      <chart :options="chartOptions"
+             :chartData="formattedDifferenceData"
              :height="400"></chart>
     </div>
 
     <pre class="container well rounded source-code">
-      {{ storeChartData }}
+      {{ formattedWeightData }}
     </pre>
 
     <pre class="container well rounded source-code">
@@ -66,7 +73,7 @@ const chartOptions = {
   }
 }
 
-const formattedDataset = (name, rawData) => {
+const formattedDataset = (name, key, rawData) => {
   if (rawData.length > 0) {
     return {
       datasets: [
@@ -80,7 +87,7 @@ const formattedDataset = (name, rawData) => {
           data: rawData.length > 0 ? rawData.map(p => (
             {
               x: p.timestamp,
-              y: p.weight
+              y: p[key]
             }
           )) : []
         }
@@ -107,8 +114,11 @@ export default {
     }
   },
   computed: {
-    storeChartData () {
-      return formattedDataset('Full data', this.weightData)
+    formattedWeightData () {
+      return formattedDataset('Weight', 'weight', this.weightData)
+    },
+    formattedDifferenceData () {
+      return formattedDataset('Difference', 'difference', this.weightData)
     },
     ...mapGetters(['startTime', 'endTime', 'weightData'])
   },
