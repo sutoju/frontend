@@ -26,7 +26,7 @@ export default {
 @import './main.scss';
 
 .toast-container {
-  position: absolute;
+  position: fixed;
   bottom: 2 * $large;
   left: 2 * $large;
   pointer-events: none;
