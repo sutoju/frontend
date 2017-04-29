@@ -19,10 +19,24 @@
 
 <script>
 import Toasts from './Toasts'
+import * as api from './api.js'
 import './main.scss'
+
+let socket
 
 export default {
   name: 'app',
+  mounted () {
+    if (!socket) {
+      socket = api.getSocket('ws://sutoju-logic.eu-gb.mybluemix.net/ws/weights-feed')
+      socket.onopen = event => console.log('on open', event)
+      socket.onmessage = (message) => {
+        if (message.data && JSON.parse(message.data).weight) {
+          console.log('should add datapoint: ', JSON.parse(message.data))
+        }
+      }
+    }
+  },
   components: {
     Toasts
   }

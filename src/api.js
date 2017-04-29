@@ -16,3 +16,5 @@ export const del = (url) => {
   return fetch(API_BASE + url, { method: 'DELETE' })
     .then(res => res.json())
 }
+
+export const getSocket = url => new WebSocket(url)

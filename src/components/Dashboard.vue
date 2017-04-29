@@ -29,15 +29,14 @@
             {{ formatEmoji(food.type) }}
             </div>
             <div class="fruit-info">
-              <span>{{ 'x' + food.count }}</span>
+              <span class="fruit-count">{{ 'x' + food.count }}</span>
               <p>expires {{ formatDuration(food.expires) }}</p>
             </div>
           </div>
           <div v-if="editMode" class="fruit-edit">
             <div class="actions-count">
-              {{ food.count }}
-              {{ isEditingFood(food) }}
-              <icon v-if="food.editing" class="action-spinner" name="circle-o-notch" scale="2" spin></icon>
+              <div class="actions-type">{{ food.type }}</div>
+              <div>{{ food.count }}</div>
             </div>
             <div class="actions">
               <button class="button" @click="editFoodItem(food.type, 'add')"><icon name="plus" scale="2"></icon></button>
@@ -138,6 +137,7 @@ export default {
   font-size: 1rem;
   margin: 0 $medium $medium 0;
   @extend .source-sans;
+  color: #404040;
 
   @media (max-width: 767px) {
     font-size: 0.8rem;
@@ -160,6 +160,19 @@ export default {
 
 .fruit-image {}
 
+.fruit-count {
+  border-radius: 13px;
+  background: $accent;
+  color: white;
+  padding: 3px 10px;
+  font-size: 13pt;
+}
+
+.fruit-name {
+  color: $black;
+  font-size: 18pt;
+}
+
 .fruit-edit {
   position: absolute;
   background-color: transparentize(black, 0.8);
@@ -178,9 +191,19 @@ export default {
     text-align: center;
     font-size: 40pt;
     display: flex;
+    flex-direction: column;
     background: transparentize($accent, 0.1);
     justify-content: center;
     align-items: center;
+
+    .actions-type {
+      font-size: 16pt;
+      text-transform: capitalize;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
   }
 
   .action-spinner {

@@ -5,7 +5,6 @@
       <slot>
         <p>Empty card content</p>
         <button class="button fluid">button</button>
-
       </slot>
     </div>
   </div>
@@ -24,15 +23,17 @@ export default {
 .card {
   max-width: 400px;
   border-radius: 10px;
+  padding: $medium;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .title {
   font-size: 16pt;
-  margin-bottom: $small;
   text-transform: capitalize;
 }
 
 .content {
-  margin-top: $medium;
 }
 </style>
