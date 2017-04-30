@@ -65,10 +65,13 @@ import 'vue-awesome/icons/calendar'
 import 'vue-awesome/icons/circle-o-notch'
 
 import apple from '../assets/apple.png'
+import ananas from '../assets/ananas.png'
 import banana from '../assets/banana.png'
 import cucumber from '../assets/cucumber.png'
 import orange from '../assets/orange.png'
 import plate from '../assets/plate.png'
+import honey from '../assets/honey.png'
+import rice from '../assets/rice.png'
 
 import Card from './Card'
 
@@ -112,6 +115,10 @@ export default {
           return '🍊'
         case 'ananas':
           return '🍍'
+        case 'honey':
+          return '🍯'
+        case 'rice':
+          return '🍚'
         default:
           return '🍽️'
       }
@@ -127,7 +134,11 @@ export default {
         case 'orange':
           return orange
         case 'ananas':
-          return plate
+          return ananas
+        case 'honey':
+          return honey
+        case 'rice':
+          return rice
         default:
           return plate
       }
